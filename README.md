@@ -7,6 +7,11 @@ Tsang H, Moss M, Fedewa G et al. NastyBugs: A simple method for extracting antim
 7, 6:1971
 (doi: 10.12688/f1000research.12781.1)
 
-Antibiotic resistance (AMR) of bacterial pathogens is a growing public health threat around the world. Fast and reliable extraction of antimicrobial resistance genomic signatures from large raw seque
-ncing datasets obtained from human metagenomes is a key task for bioinformatics.
+
+
+The resistome describes all antimicrobial resistance genes, including those found in pathogenic and non-pathogenic bacteria (Wright, G., et al.). While the antibiotic resistome is intrinsic to nearly all environments, particular interest has emerged in the context of human health and the treatment of diseases. Widespread use of antibiotics had led to the emergence of antimicrobial resistance in several strains of pathogenic bacteria. Although mechanisms for antibiotic resistance, such as those to counteract penicillin, likely existed long before the first synthetic antibiotic, cycles of new drug development and the evolutionary response from bacteria, as well as misuse of these antibiotics, have driven the fixation of drug resistance genes (Waglechner, N., et al.; Barbosa, T., et al.). As a result, the pressure is on to innovate new antimicrobial treatments against multi-drug resistant pathogens in the face of a potentially deadly public health crisis.
+High throughput sequencing has allowed researchers to catalogue large databanks of bacterial sequences, and the ability to examine the genetic code of the pathogenic microbes has given insight into some of the genes that confer antibiotic resistance. Accurate tools predicting specific antibiotic resistance in a microbial sample may allow physicians to give more precise and effective treatments for infections, leading to better patient outcomes and reducing the rate of antimicrobial resistance.
+
+*If nanopore sequencing added to pipeline:////move to next steps if not
+
 
