@@ -14,4 +14,5 @@ High throughput sequencing has allowed researchers to catalogue large databanks 
 
 *If nanopore sequencing added to pipeline:////move to next steps if not
 
+![workflow](https://github.com/stevetsa/Versa_AB_Resist/blob/master/workflow.png "Workflow")
 
