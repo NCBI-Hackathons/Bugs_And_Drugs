@@ -32,7 +32,7 @@ mkdir test
 Please see for further information: [How to use and run a Docker image](https://github.com/NCBI-Hackathons/Cancer_Epitopes_CSHL/blob/master/doc/Docker.md)
 
 ### Creating data library for mapping accessions 
-The CARD database is used to obtain gene, orgranism, and drug-related information for the sequence hits obtained from MAGIC-BLAST. The latest version of this data can be downloaded from ![CARD](https://card.mcmaster.ca/download "CARD")
+The CARD database is used to obtain gene, orgranism, and drug-related information for the sequence hits obtained from MAGIC-BLAST. The latest version of this data can be downloaded from [CARD](https://card.mcmaster.ca/download)
 The following are required  - 
 1. card-data 
 2. card-ontology
