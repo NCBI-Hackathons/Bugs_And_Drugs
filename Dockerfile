@@ -240,14 +240,14 @@ RUN pip install seaborn
 
 # Configure container startup
 ENTRYPOINT ["tini", "--"]
-CMD ["scripts/start-notebook.sh"]
+CMD ["start-notebook.sh"]
 
 # Add local files as late as possible to avoid cache busting
 COPY scripts/start.sh /usr/local/bin/
 COPY scripts/start-notebook.sh /usr/local/bin/
 COPY scripts/start-singleuser.sh /usr/local/bin/
 COPY scripts/jupyter_notebook_config.py /etc/jupyter/
-RUN scripts/fix-permissions /etc/jupyter/
+RUN fix-permissions /etc/jupyter/
 
 # Switch back to non-root user to avoid accidental container runs as root
 USER $NB_UID
