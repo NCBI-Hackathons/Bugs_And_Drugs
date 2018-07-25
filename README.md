@@ -73,6 +73,10 @@ Sample output display courtesy of [Krona](https://github.com/marbl/Krona/wiki).
 An interactive sample can be accessed at this [link](http://marbl.github.io/Krona/examples/phymmbl.krona.html?collapse=false&color=true&key=false).
 
 ## Future Directions
+* Include MINion data from third-generation sequencing
+* Expand number of databases utilized to run alignments
+* Build in more information, such as time and geographical information to map evolution rates
+* Implement machine learning analysis
 
 ## References
 Jia et al. 2017. CARD 2017: expansion and model-centric curation of the Comprehensive Antibiotic Resistance Database. Nucleic Acids Research, 45, D566-573.
