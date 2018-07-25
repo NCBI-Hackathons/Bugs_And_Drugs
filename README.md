@@ -49,7 +49,7 @@ The following are required:
 These need to be downloaded and unzipped into the 'lib' directory 
 
 ### Workflow Diagram
-![workflow](https://github.com/NCBI-Hackathons/Versa_AB_Resist/blob/master/workflow2.png "Workflow")
+![workflow](https://github.com/NCBI-Hackathons/Bugs_And_Drugs/blob/master/BAD%20workflow.jpg "Workflow")
 
 ## Workflow Steps
 ### Input File Format
