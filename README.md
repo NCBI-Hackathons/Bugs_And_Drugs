@@ -68,7 +68,7 @@ The Docker image contains the Jupyter sever and all the tools used in this pipel
 
 ## Output
 
-![kronasample](https://github.com/NCBI-Hackathons/Bugs_And_Drugs/blob/master/Slide1.jpg "Kronasample")
+![kronasample](https://github.com/NCBI-Hackathons/Bugs_And_Drugs/blob/master/Slide1.jpg)
 Sample output display courtesy of [Krona](https://github.com/NCBI-Hackathons/Bugs_And_Drugs/blob/master/Slide1.jpg).
 An interactive sample can be accessed at this [link](http://marbl.github.io/Krona/examples/phymmbl.krona.html?collapse=false&color=true&key=false).
 
