@@ -15,37 +15,40 @@ This program can be used as a standalone in a Jupyter notebook or run in a Docke
 
 ## Installation
 ### Jupyter Notebooks
-
+```
+# CODE HERE
+```
 ### Docker
 1. First, [install Docker](https://docs.docker.com/install/) if it is not already on your machine. On the Docker website, refer to the menu on the side to find the correct operating system and corresponding installation guide.
 2. Enter the following from the command line to run the docker image:
 ```
-# Pull latest version of docker image
+# 1. Pull latest version of docker image
 docker pull stevetsa/metagenomicantibioticresistance:latest
 
-# Run the docker image
+# 2. Run the docker image
 docker run -v `pwd`:`pwd` -w `pwd` -i -t stevetsa/metagenomicantibioticresistance:latest
 
-# Create directory to store results (this folder will persist on your host machine when you exit out of the Docker container)
+# 3. Create directory to store results (this folder will persist on your host machine when you exit out of the Docker container)
 mkdir test
 ```
 Please see for further information: [How to use and run a Docker image](https://github.com/NCBI-Hackathons/Cancer_Epitopes_CSHL/blob/master/doc/Docker.md)
 
 ### Creating data library for mapping accessions 
 The CARD database is used to obtain gene, orgranism, and drug-related information for the sequence hits obtained from MAGIC-BLAST. The latest version of this data can be downloaded from [CARD](https://card.mcmaster.ca/download)
-The following are required  - 
-1. card-data 
-2. card-ontology
-3. card-prevalence 
-These needs to be downloaded and unzipped into the 'lib' directory 
-
+The following are required: 
+1. [card-data](https://card.mcmaster.ca/download/0/broadstreet-v2.0.2.tar.gz)
+2. [card-ontology](https://card.mcmaster.ca/download/5/ontology-v2.0.2.tar.gz)
+3. [card-prevalence](https://card.mcmaster.ca/download/6/prevalence-v3.0.1.tar.gz)
+These need to be downloaded and unzipped into the 'lib' directory 
 
 ### Workflow Diagram
 ![workflow](https://github.com/NCBI-Hackathons/Versa_AB_Resist/blob/master/workflow2.png "Workflow")
 
 ## Workflow Steps
 ### Input File Format
-
+```
+# CODE HERE
+```
 ### Jupyter Notebook
 ```
 # CODE HERE
