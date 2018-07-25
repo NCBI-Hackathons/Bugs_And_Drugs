@@ -229,6 +229,15 @@ RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
 RUN jupyter labextension install qgrid
 
+WORKDIR /opt
+RUN git clone https://github.com/marbl/Krona.git
+WORKDIR /opt/Krona/KronaTools
+RUN ./install.pl --prefix /usr/local/bin --taxonomy /opt/Krona/KronaTools
+RUN apt-get install -y curl
+RUN ./updateTaxonomy.sh
+RUN ./updateAccessions.sh
+RUN pip install seaborn
+
 # Configure container startup
 ENTRYPOINT ["tini", "--"]
 CMD ["scripts/start-notebook.sh"]
