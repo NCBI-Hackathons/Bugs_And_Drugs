@@ -1,5 +1,5 @@
 # Bugs and Drugs (B.A.D.)
-![logo](https://github.com/NCBI-Hackathons/Versa_AB_Resist/blob/master/bad%20logo%20w%20text.jpg "logo")
+![logo](https://github.com/NCBI-Hackathons/Bugs_And_Drugs/blob/master/BAD%20logo%20text.jpg "logo")
 
 *This pipeline builds upon [Nastybugs](https://github.com/NCBI-Hackathons/MetagenomicAntibioticResistance), a program developed in a previous NCBI hackathon designed to extract antimicrobial resistance information from metagenomes.*
 
