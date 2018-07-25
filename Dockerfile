@@ -1,28 +1,56 @@
+# Contents of the Dockerfile by Steve Ts and Jupyter Development Team.
+
+# Ubuntu 16.04 (xenial) from 2018-02-28
+# https://github.com/docker-library/official-images/commit/8728671fdca3dfc029be4ab838ab5315aa125181
+#FROM ubuntu:xenial-20180228@sha256:e348fbbea0e0a0e73ab0370de151e7800684445c509d46195aef73e090a49bd6
+
 FROM ubuntu:16.04
-MAINTAINER Steve Tsang <mylagimail2004@yahoo.com>
-RUN apt-get update
+LABEL maintainer="Steve Tsang <mylagimail2004@yahoo.com>"
 
 USER root
+# Install all OS dependencies for notebook server that starts but lacks all
+# features (e.g., download as all possible file formats)
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get -yq dist-upgrade \
  && apt-get install -yq --no-install-recommends \
- build-essential \
- apt-utils \
- git-all \
- python \ 
- python-pip \
- wget \
- bzip2 \
- ca-certificates \
- sudo \
- locales \
- fonts-liberation \
- python3 \
- python3-pip \
- pkg-config \
- python-dev \
- graphviz \
- libgraphviz-dev \
+    ### Nastybugs dependencies
+    build-essential \
+    gcc-multilib \
+    apt-utils \
+    zlib1g-dev \
+    vim-common \
+    libncurses5-dev \
+    autotools-dev \
+    autoconf \
+    perl \
+    r-base \
+    python \
+    python-pip \
+    libbz2-dev \
+    liblzma-dev \
+    libz-dev \
+    ncurses-dev \
+    libcurl3 \
+    libcurl4-openssl-dev \
+    libxml2-dev \
+    ###  Jupyter dependencies
+    wget \
+    bzip2 \
+    ca-certificates \
+    sudo \
+    locales \
+    fonts-liberation \
+### mmtf-docker dependencies
+    #openjdk-8-jdk \
+    #git \
+    #curl \
+### dependencies for Nastybugs2
+    python3 \
+    python3-pip \
+    pkg-config \
+    python-dev \
+    graphviz \
+    libgraphviz-dev \ 
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -38,13 +66,13 @@ RUN wget --quiet https://github.com/krallin/tini/releases/download/v0.10.0/tini 
 # Configure environment
 ENV CONDA_DIR=/opt/conda \
     SHELL=/bin/bash \
+## modified to ubuntu user
     NB_USER=ubuntu \
     NB_UID=1000 \
     NB_GID=100 \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
-
 ENV PATH=$CONDA_DIR/bin:$PATH \
     HOME=/home/$NB_USER
 
@@ -94,53 +122,10 @@ RUN conda install --quiet --yes \
     fix-permissions /home/$NB_USER
 
 USER root
-
-#COPY /home/mylagimail2004/docker/requirements.txt /opt/
-RUN pip install --upgrade pip
-RUN pip install pygraphviz
-RUN pip3 install numpy
-RUN pip3 install pandas
-RUN pip3 install pysam
-RUN pip3 install matplotlib
-RUN pip3 install snakemake
-RUN pip3 install sequana
-#####
-#####
-
-EXPOSE 8888
-WORKDIR $HOME
-
-# Configure container startup
-ENTRYPOINT ["tini", "--"]
-CMD ["start-notebook.sh"]
-
-# Add local files as late as possible to avoid cache busting
-COPY start.sh /usr/local/bin/
-COPY start-notebook.sh /usr/local/bin/
-COPY start-singleuser.sh /usr/local/bin/
-COPY jupyter_notebook_config.py /etc/jupyter/
-RUN fix-permissions /etc/jupyter/
-
-## Install Nastybugs stuff
-RUN apt-get update && apt-get install --yes \
- gcc-multilib \
- libncurses5-dev \
- autotools-dev \
- autoconf \
- perl \
- r-base \
- libbz2-dev \
- liblzma-dev \
- libz-dev \
- ncurses-dev \
- zlib1g-dev \
- libcurl3 \
- libcurl4-openssl-dev \
- libxml2-dev \
- libtool \
- libgd-gd2-perl
- 
+####
+#Install Nastybugs stuff - https://github.com/stevetsa/MetagenomicAntibioticResistance/blob/master/Dockerfile
 WORKDIR /opt
+RUN apt-get update && apt-get install -y git
 RUN git clone https://github.com/samtools/htslib.git
 WORKDIR /opt/htslib
 RUN autoheader
@@ -179,6 +164,8 @@ RUN tar xvzf ncbi-magicblast-1.3.0-x64-linux.tar.gz
 WORKDIR /opt/ncbi-magicblast-1.3.0
 ENV PATH "$PATH:/opt/ncbi-magicblast-1.3.0/bin/"
 
+RUN apt-get install -y libtool pkg-config libgd-gd2-perl autotools-dev autoconf autogen automake 
+
 WORKDIR /opt/
 RUN git clone https://github.com/agordon/fastx_toolkit.git
 WORKDIR /opt/fastx_toolkit
@@ -203,6 +190,8 @@ RUN apt-get install -y git python3 python3-dev python3-pip ncbi-blast+ prodigal 
     wget http://github.com/bbuchfink/diamond/releases/download/v0.8.36/diamond-linux64.tar.gz && \
     tar xvf diamond-linux64.tar.gz && \
     mv diamond /usr/bin
+
+
 WORKDIR /opt
 RUN wget https://card.mcmaster.ca/download/1/software-v4.1.0.tar.gz
 RUN tar xvf software-v4.1.0.tar.gz
@@ -212,18 +201,51 @@ RUN pip3 install -r requirements.txt && \
     pip3 install . && \
     bash test.sh 
 
+WORKDIR /
+#RUN git clone https://github.com/stevetsa/MetagenomicAntibioticResistance.git
 
-# Switch back to jovyan to avoid accidental container runs as root
-#USER $NB_UID
+# Install Nastybugs2
+
+RUN pip install --upgrade pip
+RUN pip install pygraphviz
+RUN pip3 install numpy
+RUN pip3 install pandas
+RUN pip3 install pysam
+RUN pip3 install matplotlib
+RUN pip3 install snakemake
+RUN pip3 install sequana
+
+#########
+
+
+USER root
+
+EXPOSE 8888
+WORKDIR $HOME
+RUN pip install qgrid
+
+RUN jupyter nbextension enable --py --sys-prefix qgrid
+RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN jupyter labextension install qgrid
+
+# Configure container startup
+ENTRYPOINT ["tini", "--"]
+CMD ["scripts/start-notebook.sh"]
+
+# Add local files as late as possible to avoid cache busting
+COPY scripts/start.sh /usr/local/bin/
+COPY scripts/start-notebook.sh /usr/local/bin/
+COPY scripts/start-singleuser.sh /usr/local/bin/
+COPY scripts/jupyter_notebook_config.py /etc/jupyter/
+RUN scripts/fix-permissions /etc/jupyter/
+
+# Switch back to non-root user to avoid accidental container runs as root
+USER $NB_UID
+
 ####
 # Get notebooks
-RUN chown -R $NB_USER /home/$NB_USER/work
-WORKDIR  /home/$NB_USER/work
-RUN git clone https://github.com/stevetsa/MetagenomicAntibioticResistance.git
+#WORKDIR  /home/$NB_USER/work
+#RUN git clone https://github.com/sbl-sdsc/mmtf-workshop-2018.git
+#WORKDIR $HOME
 
-##
-## Nanopore stuff
-##
-
-##RUN git clone pretty nastybugs
-WORKDIR /home/$NB_USER/work
