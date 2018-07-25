@@ -1,10 +1,6 @@
-# Bugs and Drugs
+# Bugs and Drugs (B.A.D.)
 
-*This pipeline builds on a previous NCBI hacakthon product, [Nastybugs](https://github.com/NCBI-Hackathons/MetagenomicAntibioticResistance), which is a simple method for extracting antimicrobial res
-istance information from metagenomes
-Tsang H, Moss M, Fedewa G et al. NastyBugs: A simple method for extracting antimicrobial resistance information from metagenomes [version 1; referees: 1 approved with reservations]. F1000Research 201
-7, 6:1971
-(doi: 10.12688/f1000research.12781.1)*
+*This pipeline builds upon [Nastybugs](https://github.com/NCBI-Hackathons/MetagenomicAntibioticResistance), a program developed in a previous NCBI hackathon designed to extract antimicrobial resistance information from metagenomes.*
 
 ## Introduction
 
@@ -39,6 +35,7 @@ The following are required:
 1. [card-data](https://card.mcmaster.ca/download/0/broadstreet-v2.0.2.tar.gz)
 2. [card-ontology](https://card.mcmaster.ca/download/5/ontology-v2.0.2.tar.gz)
 3. [card-prevalence](https://card.mcmaster.ca/download/6/prevalence-v3.0.1.tar.gz)
+
 These need to be downloaded and unzipped into the 'lib' directory 
 
 ### Workflow Diagram
