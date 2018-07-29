@@ -17,6 +17,10 @@ RUN apt-get update && apt-get -yq dist-upgrade \
     build-essential \
     gcc-multilib \
     apt-utils \
+    autotools-dev \
+    autoconf \
+    autogen \
+    automake \
     zlib1g-dev \
     vim-common \
     libncurses5-dev \
@@ -40,10 +44,6 @@ RUN apt-get update && apt-get -yq dist-upgrade \
     sudo \
     locales \
     fonts-liberation \
-### mmtf-docker dependencies
-    #openjdk-8-jdk \
-    #git \
-    #curl \
 ### dependencies for Nastybugs2
     python3 \
     python3-pip \
@@ -51,6 +51,13 @@ RUN apt-get update && apt-get -yq dist-upgrade \
     python-dev \
     graphviz \
     libgraphviz-dev \ 
+    libtool \
+    libgd-gd2-perl \
+#    autotools-dev \
+#    autoconf \
+#    autogen 
+#    automake \
+    curl \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -152,10 +159,10 @@ WORKDIR /opt/ncbi-blast-2.7.1+
 ENV PATH "$PATH:/opt/ncbi-blast-2.7.1+/"
 
 WORKDIR /opt/
-RUN wget https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/current/sratoolkit.current-ubuntu64.tar.gz
-RUN tar xvzf sratoolkit.current-ubuntu64.tar.gz
+RUN wget https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.9.0/sratoolkit.2.9.0-ubuntu64.tar.gz
+RUN tar xvzf sratoolkit.2.9.0-ubuntu64.tar.gz
 WORKDIR /opt/sratoolkit.2.9.0-ubuntu64
-ENV PATH "$PATH: /opt/sratoolkit.2.9.0-ubuntu64/bin/"
+ENV PATH "$PATH:/opt/sratoolkit.2.9.0-ubuntu64/bin/"
 RUN apt-get install -y unzip
 
 WORKDIR /opt/
@@ -163,8 +170,6 @@ RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/magicblast/1.3.0/ncbi-magi
 RUN tar xvzf ncbi-magicblast-1.3.0-x64-linux.tar.gz
 WORKDIR /opt/ncbi-magicblast-1.3.0
 ENV PATH "$PATH:/opt/ncbi-magicblast-1.3.0/bin/"
-
-RUN apt-get install -y libtool pkg-config libgd-gd2-perl autotools-dev autoconf autogen automake 
 
 WORKDIR /opt/
 RUN git clone https://github.com/agordon/fastx_toolkit.git
@@ -191,7 +196,6 @@ RUN apt-get install -y git python3 python3-dev python3-pip ncbi-blast+ prodigal 
     tar xvf diamond-linux64.tar.gz && \
     mv diamond /usr/bin
 
-
 WORKDIR /opt
 RUN wget https://card.mcmaster.ca/download/1/software-v4.1.0.tar.gz
 RUN tar xvf software-v4.1.0.tar.gz
@@ -208,6 +212,7 @@ WORKDIR /
 
 RUN pip install --upgrade pip
 RUN pip install pygraphviz
+RUN pip install seaborn
 RUN pip3 install numpy
 RUN pip3 install pandas
 RUN pip3 install pysam
@@ -216,7 +221,11 @@ RUN pip3 install snakemake
 RUN pip3 install sequana
 
 #########
-
+RUN conda config --add channels defaults
+RUN conda config --add channels conda-forge
+RUN conda config --add channels bioconda
+RUN conda install bowtie2
+#########
 
 USER root
 
@@ -233,10 +242,11 @@ WORKDIR /opt
 RUN git clone https://github.com/marbl/Krona.git
 WORKDIR /opt/Krona/KronaTools
 RUN ./install.pl --prefix /usr/local/bin --taxonomy /opt/Krona/KronaTools
-RUN apt-get install -y curl
-RUN ./updateTaxonomy.sh
-RUN ./updateAccessions.sh
-RUN pip install seaborn
+#RUN apt-get install -y curl
+#RUN ./updateTaxonomy.sh
+#RUN ./updateAccessions.sh
+
+#RUN cp -r /opt/sratoolkit.2.9.0-ubuntu64/bin/* /usr/local/bin/.
 
 # Configure container startup
 ENTRYPOINT ["tini", "--"]
