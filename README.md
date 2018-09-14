@@ -26,14 +26,14 @@ rating system and corresponding installation guide.
 # 1. Connect to GCP VM and pull latest version of the docker image
 
 ssh -L 8888:0.0.0.0:8888 $USER@00.000.000.000
-docker pull stevetsa/versa_ab_resist:latest
+docker pull stevetsa/Bugs_And_Drugs:latest
 
 # 2. Create directory to store results (this folder will persist on your host machine when you exit out of the Docker container)
 mkdir -p test
 chmod -R 777 test
 
 # 3. Run the docker image and mount current directory (and all downstream directories, including "test") in the same path inside the container
-docker run -it --rm -v `pwd`:`pwd` -w `pwd` -p 8888:8888 stevetsa/versa_ab_resist:latest
+docker run -it --rm -v `pwd`:`pwd` -w `pwd` -p 8888:8888 stevetsa/Bugs_And_Drugs:latest
 
 ### Follow on-screen directions to open a Jupyter Notebook in a browser.  Subsequent steps in the pipeline can be run directly in the Notebook.   
 ```
