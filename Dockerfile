@@ -259,6 +259,8 @@ COPY scripts/start-singleuser.sh /usr/local/bin/
 COPY scripts/jupyter_notebook_config.py /etc/jupyter/
 RUN fix-permissions /etc/jupyter/
 
+RUN chmod 777 /opt/Krona/KronaTools
+
 # Switch back to non-root user to avoid accidental container runs as root
 USER $NB_UID
 
